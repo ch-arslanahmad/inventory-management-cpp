@@ -59,13 +59,7 @@ Each product consists of:
 ---
 
 ## ⚙️ How to Compile and Run
-
-```bash
-g++ -o inventory main.cpp
-./inventory
-```
-
----
+As it is a one file line code, you could use Online Compilers, e.g, [Programiz C++ Compiler.](https://www.programiz.com/cpp-programming/online-compiler/)
 
 ## 📤 Output Example
 
