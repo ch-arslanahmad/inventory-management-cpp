@@ -54,6 +54,7 @@ As it is a one file line code, you could use Online Compilers, e.g, [Programiz C
 
 ## Output Example
 
+<img src="images/output_inventory-management.png" alt="Image" width="600"/>
 
 ---
 
@@ -61,11 +62,11 @@ As it is a one file line code, you could use Online Compilers, e.g, [Programiz C
 
 ```text
  Inventory-Management
-├── inventory.cpp            # Source code
+├── inventory-management.cpp            # Source code
 ├── README.md           # This file
 └── images/
     └── inventory-flowchart.png   # Flowchart
-    └── uol-modified.png
+    └── output_inventory-management.png # Output Image
 ```
 
 ---
