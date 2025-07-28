@@ -1,6 +1,6 @@
 # Inventory Management System (C++)
 
-![Language](https://img.shields.io/badge/language-C++-blue.svg)
+![Language](https://img.shields.io/badge/language-C++-yellow.svg)
 ![Status](https://img.shields.io/badge/status-StudentProject-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
