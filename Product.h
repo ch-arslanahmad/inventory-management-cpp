@@ -8,6 +8,10 @@ class Product
     int quantity;
 
 public:
+    Product()
+    {
+    }
+
     Product(std::string name, double price, int quantity) // constructor
     {
         this->name = name;
@@ -15,7 +19,7 @@ public:
         this->quantity = quantity;
     }
 
-    // Constructor 2
+    // Constructor 2 - only NAME
     Product(std::string name)
     {
         this->name = name;
