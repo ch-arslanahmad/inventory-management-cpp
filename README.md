@@ -11,16 +11,17 @@ This was a group project completed with a fellow student as part of coursework. 
 
 ## Project Overview
 
-This Inventory Management System is a console-based application written in C++.  
+This Inventory Management System is a console-based application written in C++ with persistant SQLite storage and `modern_sqlite_cpp` library file.  
 It allows users to manage product records including:
 
-- Searching by product name  
+- Searching by product name - to view all its details
 - Adding new items  
 - Removing entries  
 - Updating product details  
 - Viewing the complete inventory  
 
 Each product consists of:
+
 - Name
 - Price
 - Quantity
@@ -45,12 +46,24 @@ Each product consists of:
 
 <img src="images/inventory-flowchart.png" alt="Image" width="600"/>
 
-
-
 ---
 
 ## How to Compile and Run
-As it is a one file line code, you could use Online Compilers, e.g, [Programiz C++ Compiler.](https://www.programiz.com/cpp-programming/online-compiler/)
+
+```terminal
+
+git clone https://github.com/ch-arslanahmad/inventory-management-cpp/
+cd inventory-management-cpp
+g++ main.cpp -o main  
+
+```
+
+Then to run,
+
+```terminal
+main.exe # if windows
+./main # if Linux/macOS
+```
 
 ## Output Example
 
@@ -64,6 +77,8 @@ As it is a one file line code, you could use Online Compilers, e.g, [Programiz C
  Inventory-Management
 ├── inventory-management.cpp            # Source code
 ├── README.md           # This file
+└── storage/    # DB file, DB library (header) files (sqlite_modern_cpp)
+    └── lib/
 └── images/
     └── inventory-flowchart.png   # Flowchart
     └── output_inventory-management.png # Output Image
@@ -92,6 +107,8 @@ It demonstrates foundational concepts in C++ such as:
 - Vector manipulation  
 - Console I/O handling  
 
+### Update (Self-Driven):
+Added Persistant SQLite Storage via `sqlite_modern_cpp`
 
 ---
 
