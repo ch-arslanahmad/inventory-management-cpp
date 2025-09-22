@@ -27,7 +27,7 @@ T input(std::string message)
     }
 }
 
-// Specialization for strings (handles spaces)
+// Specialization template function for strings
 template <>
 std::string input<std::string>(std::string message)
 {
