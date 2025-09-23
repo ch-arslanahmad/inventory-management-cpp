@@ -1,30 +1,8 @@
 #include <list> // for lsits
 #include "Database.h"
+#include <string>
 #include <vector>
-
-Product input_item()
-{
-    std::string name;
-    double price;
-    int quantity;
-
-    std::cout << "Enter Name: ";
-    std::getline(std::cin >> std::ws, name);
-
-    std::cout << "Price: ";
-    std::cin >> price;
-    std::cout << "Quantity: ";
-    std::cin >> quantity;
-
-    if (name == "0" && price == 0)
-    {
-        std::cout << "Aborting Add Operation\n";
-        return Product("", 0, 0); // sentinel Product
-    }
-
-    std::cout << "The Item has been added.\n";
-    return Product(name, price, quantity);
-}
+#include "input.h"
 
 /* const std::string &name
 Unlike languages like Java or Python do not have pass-by reference which allows the either to do by reference or by value.
@@ -78,9 +56,9 @@ bool addItem(Product item)
     }
 }
 
-bool removeItem(Product item)
+bool removeItem(const std::string &name)
 {
-    if (itemExists(item.getName()))
+    if (itemExists(name))
     {
         cout << "Item already exists.";
         return false;
@@ -94,7 +72,7 @@ bool removeItem(Product item)
     }
     else
     {
-        *db << "INSERT INTO inventory(name,price,quantity) VALUES((?),(?),(?))" << item.getName() << item.getPrice() << item.getQuantity(); // as 'db' is optional and to get the actual from optional (wrapper), dereference operator is needed
+        *db << "DELETE FROM inventory WHERE name = ?" << name; // as 'db' is optional and to get the actual from optional (wrapper), dereference operator is needed
         std::cout << "Successfully added item.";
         return true;
     }
