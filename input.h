@@ -42,3 +42,19 @@ std::string input<std::string>(std::string message)
     return value;
     std::cout << "Input cannot be empty. " << message;
 }
+
+Product input_item()
+{
+    std::string name;
+    double price;
+    int quantity;
+    name = input<std::string>("Enter Name: ");
+    price = input<double>("Price: ");
+    quantity = input<int>("Quantity: ");
+    if (name == "0" && price == 0)
+    {
+        std::cout << "Aborting Operation\n";
+        return Product("", 0, 0); // sentinel (default) details
+    }
+    return Product(name, price, quantity);
+}
