@@ -47,4 +47,4 @@ std::string input<std::string>() { ... }
 ```
 
 > [!Note]
-> Special version of the input<T> template, but only for T = std::string
+> Special version of the input <T> template, but only for T = std::string

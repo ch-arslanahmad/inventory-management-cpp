@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include "storage/lib/sqlite_modern_cpp.h" // importing sqlite db
 #include "Product.h"
@@ -34,4 +36,3 @@ bool createStructure()
         return true;
     }
 }
-
