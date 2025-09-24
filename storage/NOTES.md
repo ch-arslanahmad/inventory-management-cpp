@@ -13,6 +13,12 @@ sudo apt install libsqlite3-dev sqlite3
 
 But its too verbose, hence an easy solution, i found was `sqlite_modern_cpp`, its syntax is quite easy and clear.
 
+Now for logging,
+
+```bash
+sudo apt install libspdlog-dev
+```
+
 I have now been introduced to template based (generic) functions.
 
 In C++, the input taken is `std::cout` and is quite verbose and different, and without validation, hence it is necessary to build a generic function that takes an input like python so feels easier to use.

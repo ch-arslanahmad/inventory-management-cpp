@@ -32,7 +32,6 @@ bool createStructure()
     {
         std::string create_structure_query = "CREATE TABLE IF NOT EXISTS inventory(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, price INTEGER, quantity FLOAT )";
         *db << create_structure_query; // as 'db' is optional and to get the actual from optional (wrapper), dereference operator is needed
-        std::cout << "Successfully made structure.";
         return true;
     }
 }
