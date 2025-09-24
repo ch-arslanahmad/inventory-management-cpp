@@ -1,8 +1,9 @@
+#pragma once
+
 #include <list> // for lsits
 #include "Database.h"
 #include <string>
 #include <vector>
-#include "input.h"
 
 /* const std::string &name
 Unlike languages like Java or Python do not have pass-by reference which allows the either to do by reference or by value.
@@ -20,6 +21,51 @@ In which [&] is used to capture all the output while the next are variables in q
 
 */
 
+// does table exist
+bool tableExists(const std::string &tableName)
+{
+    
+    auto db = createConnection();
+    if (!db)
+        return false;
+
+    bool exists = false;
+    *db << "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name=?"
+        << tableName >>
+        [&](int count)
+    {
+        exists = (count > 0);
+    };
+    return exists;
+}
+
+// ? does item exist in table
+bool itemsExist(const std::string &tableName = "inventory")
+{
+    if (!tableExists(tableName))
+    {
+        createStructure(); // create strucutre;
+    }
+
+    // Validating the tableName to prevent SQL injection
+    if (tableName != "inventory" && tableName != "another_valid_table")
+    {
+        return false; // Or throw an exception
+    }
+
+    auto db = createConnection();
+    if (!db)
+        return false;
+
+    bool hasItems = false;
+    *db << "SELECT COUNT(*) FROM " << tableName >> [&](int count)
+    {
+        hasItems = (count > 0);
+    };
+    return hasItems;
+}
+
+// item exists (by input)
 bool itemExists(const std::string &name)
 {
     auto db = createConnection();
@@ -82,7 +128,7 @@ std::optional<Product> fetchItemDetails(const std::string &name)
 {
     if (!itemExists(name))
     {
-        cout << "Item does not exist.";
+        cout << "Item does not exist.\n";
         return std::nullopt;
     }
 
@@ -141,7 +187,7 @@ bool updateItem(Product item)
         return false;
     }
 
-    *db << "UPDATE inventory SET price=?, quantity=? WHERE name=?" << item.getPrice() << item.getQuantity() << item.getName(); // as 'db' is optional and to get the actual from optional (wrapper), dereference operator is needed
+    *db << "UPDATE inventory SET name = ?, price=?, quantity=? WHERE name=?" << item.getPrice() << item.getQuantity() << item.getName(); // as 'db' is optional and to get the actual from optional (wrapper), dereference operator is needed
 
     std::cout << "Successfully updated item.";
     return true;
@@ -170,7 +216,7 @@ bool updateItem(std::string &name, int &quantity)
 }
 
 // UPDATE: item - price from name
-bool updateItem(std::string &name, int &price)
+bool updateItem(std::string &name, double &price)
 {
     if (itemExists(name))
     {
@@ -186,27 +232,6 @@ bool updateItem(std::string &name, int &price)
     }
 
     *db << "UPDATE inventory SET price=? WHERE name=?" << price << name; // as 'db' is optional and to get the actual from optional (wrapper), dereference operator is needed
-
-    std::cout << "Successfully updated item.";
-    return true;
-}
-
-bool updateItem(std::string &name, int &quantity)
-{
-    if (itemExists(name))
-    {
-        cout << "Item already exists.";
-        return false;
-    }
-
-    std::optional<sqlite::database> db = createConnection();
-    if (!db)
-    {
-        std::cout << "Error Establishing (DB-updateName) Connection.";
-        return false;
-    }
-
-    *db << "UPDATE inventory SET quantity=? WHERE name=?" << quantity << name; // as 'db' is optional and to get the actual from optional (wrapper), dereference operator is needed
 
     std::cout << "Successfully updated item.";
     return true;
