@@ -1,9 +1,8 @@
-# Inventory Management System (C++)
+# C++ Inventory Management System
 
 ![Language](https://img.shields.io/badge/language-C++-yellow.svg)
 ![Status](https://img.shields.io/badge/status-StudentProject-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
-
 
 This was a group project completed with a fellow student as part of coursework. I was primarily responsible for the overall implementation, including planning, coding, and testing.
 
@@ -28,93 +27,106 @@ Each product consists of:
 
 ---
 
-## Algorithm Summary
-
 ```text
 1. Start
-2. Load default inventory
-3. Display menu options
-4. Take user input of the choice
-5. Execute the choice:
-   - Search / Add / Remove / Update / View / Exit
-6. Loop until user exits
+2. Load the default inventory from the database
+3. Display menu options:
+   - If no items exist, show only the "Add" option
+4. Take user input for the desired action
+5. Execute chosen action via DAO/CLI:
+   - Search, Add, Remove, Update, View, or Exit
+6. Repeat steps 3–5 until the user chooses to exit (default option `0`)
 ```
 
 ---
 
 ## Flowchart
 
-<img src="images/inventory-flowchart.png" alt="Image" width="600"/>
-
----
+<img src="images/inventory-flowchart.png" alt="Image" width="500"/>
 
 ## How to Compile and Run
 
-```terminal
+### Tools Used
 
-git clone https://github.com/ch-arslanahmad/inventory-management-cpp/
-cd inventory-management-cpp
-g++ main.cpp -o main  
+- g++ - C++ Compiler
+- SQLite (for persistant Storage)
+- VSCode - IDE
+
+The following things are also installed (for Ubuntu)
+
+```bash
+sudo apt install libsqlite3-dev sqlite3
+```
+
+But its too verbose, hence an easy solution, i found was `sqlite_modern_cpp`, its syntax is quite easy and clear.
+
+```bash
+sudo apt install libspdlog-dev
 
 ```
 
-Then to run,
+``` bash
 
-```terminal
-main.exe # if windows
-./main # if Linux/macOS
+git clone [https://github.com/ch-arslanahmad/inventory-management-cpp/](https://github.com/ch-arslanahmad/inventory-management-cpp/)
+cd inventory-management-cpp
+g++ main.cpp -o main -lsqlite3  
+```
+
+To run the executable:
+Code snippet
+
+```cmd
+main.exe # if on Windows
+./main # if on Linux/macOS
+
 ```
 
 ## Output Example
 
-<img src="images/output_inventory-management.png" alt="Image" width="600"/>
-
----
+<img src="images/output_v2.png" alt="Image" width="500"/>
 
 ## File Structure
 
 ```text
- Inventory-Management
-├── inventory-management.cpp            # Source code
-├── README.md           # This file
-└── storage/    # DB file, DB library (header) files (sqlite_modern_cpp)
-    └── lib/
-└── images/
-    └── inventory-flowchart.png   # Flowchart
-    └── output_inventory-management.png # Output Image
-```
+├── .
+├── main.cpp            # ---- Main File
+├── databaseDAO.h       # DAO for DB operations
+├── display.h           
+├── input.h             # Handles all input
+├── images/
+│   ├── ..
+│   └── ... 
+├── Product.h           # Model Class for inventory item
+└── storage/            # folder for storage stuff
+    ├── inventory.db    # -- database file
+    └── lib/            # SQLite library
+        └── sqlite_modern_cpp.h 
 
----
+```
 
 ## Applications
 
-This system has real-world and educational use cases:
+This system has both real-world and educational use cases:
 
-- Managing stock for small businesses or home-based shops  
-- Teaching basic programming concepts in C++  
-- Prototyping point-of-sale or inventory software  
-- Organizing personal collections (books, tools, etc.)
-
----
+- Managing stock for small businesses or home-based shops
+- Teaching fundamental C++ programming concepts
+- Prototyping a point-of-sale or inventory software
+- Organizing personal collections (e.g., books, tools)
 
 ## Notes
 
-This project was developed as part of the **Programming Fundamentals** course in Semester 2.  
-It demonstrates foundational concepts in C++ such as:
+This project was developed for the **Programming Fundamentals course** in Semester 2. It demonstrates foundational concepts in C++ such as:
 
-- Loops and conditionals  
-- Functions and user-defined structures  
-- Vector manipulation  
-- Console I/O handling  
+- Loops and conditionals
+- Functions and user-defined structures
+- Vector manipulation
+- Console I/O handling
 
-### Update (Self-Driven):
-Added Persistant SQLite Storage via `sqlite_modern_cpp`
+### Updates (Self)
 
----
-
+- Refactor Code & Added persistent SQLite storage via `sqlite_modern_cpp`
+- Implemented menu-based CRUD operations of the database
 
 ## License
 
-This project has `MIT license` hence anyone can use it.
-
----
+This project is released under the MIT License, making it free for anyone to use.
