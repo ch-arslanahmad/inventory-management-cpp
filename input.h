@@ -1,5 +1,8 @@
+#pragma once
+
 #include <iostream>
 #include <limits>
+#include <optional> // for optional
 using std::cin;
 using std::cout;
 
@@ -18,10 +21,11 @@ T input(std::string message)
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Invalid input. " << message;
-            continue.
+            continue;
         }
         else
         {
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // clear leftover input (\n)
             return value;
         }
     }
@@ -31,19 +35,22 @@ T input(std::string message)
 template <>
 std::string input<std::string>(std::string message)
 {
-    std::string value;
-    std::cout << message;
-    std::getline(std::cin >> std::ws, value); // Skip whitespace and read full line
-
-    if (!value.empty())
+    while (true)
     {
-        return value;
+        std::string value;
+        std::cout << message;
+        std::getline(std::cin >> std::ws, value); // Skip whitespace and read full line
+
+        if (!value.empty())
+        {
+            return value;
+        }
+        std::cout << "Input cannot be empty. Try Again. \n"
+                  << message;
     }
-    return value;
-    std::cout << "Input cannot be empty. " << message;
 }
 
-Product input_item()
+std::optional<Product> input_item()
 {
     std::string name;
     double price;
@@ -54,7 +61,7 @@ Product input_item()
     if (name == "0" && price == 0)
     {
         std::cout << "Aborting Operation\n";
-        return Product("", 0, 0); // sentinel (default) details
+        return std::nullopt; // sentinel (default) details
     }
     return Product(name, price, quantity);
 }
