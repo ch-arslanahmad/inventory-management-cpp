@@ -9,7 +9,7 @@ using std::cout;
 
 bool updateMenu()
 {
-    std::vector<std::string> options = {"Update Whole Item", "Update Item Price", "Update Item Quantity"};
+    std::vector<std::string> options = {"Update -  Whole Item", "Update -  Item Price", "Update - Item Quantity"};
 
     while (true)
     {
@@ -67,16 +67,16 @@ bool updateMenu()
 
 int main()
 {
-    std::vector<std::string> options = {"Search Product", "Add Product", "Remove Product", "Update Product", "See Inventory"};
+    std::vector<std::string> options = {"Add Product", "Remove Product", "Update Product", "Search Product", "See Inventory"};
 
     if (!itemsExist())
     {
         // Remove by index (0-based)
-        options.erase(options.begin() + 0); // Remove 1st element
+        options.erase(options.begin() + 1);
         options.erase(options.begin() + 2); // Remove 3rd element (after first removal)
-        options.erase(options.begin() + 3); // Remove 4th element
+        options.erase(options.begin() + 3); // Remove 4th element    }
+        options.erase(options.begin() + 4); // Remove 5th element    }
     }
-
     while (true)
     {
         int choice = MenuHandler(options);
@@ -88,15 +88,10 @@ int main()
             cout << ".";
             cout << ".";
             cout << ".";
+            cout << "\n";
             return 0;
         }
         case 1:
-        { // search
-            std::string name = input<std::string>("Enter Item (to search): ");
-            fetchItemDetails(name);
-            break;
-        }
-        case 2:
         { // add
 
             if (auto item = input_item())
@@ -109,19 +104,39 @@ int main()
             }
             break;
         }
-        case 3: // remove
+        case 2: // remove
         {
             std::string name = input<std::string>("Enter Item (to remove): ");
             removeItem(name);
             break;
         }
-        case 4:
+        case 3:
         { // update
             updateMenu();
             break;
         }
+        case 4:
+        { // search
+            std::string name = input<std::string>("Enter Item (to search): ");
+            auto details = fetchItemDetails(name);
+            if (details)
+            {
+                Product item = *details;
+                displayItemDetails(item);
+            }
+            break;
+        }
         case 5:
         { // show();
+
+            if (!itemsExist())
+            {
+                std::cout << "No item to display";
+            }
+            else
+            {
+                displayAllItems(fetchAllItems());
+            }
             break;
         }
         default:

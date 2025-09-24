@@ -117,7 +117,7 @@ bool addItem(Product item)
         else
         {
             *db << "INSERT INTO inventory(name,price,quantity) VALUES((?),(?),(?))" << item.getName() << item.getPrice() << item.getQuantity(); // as 'db' is optional and to get the actual from optional (wrapper), dereference operator is needed
-            std::cout << "Successfully added item.";
+            std::cout << "Successfully added item.\n";
             return true;
         }
     }
@@ -148,7 +148,7 @@ bool removeItem(const std::string &name)
         else
         {
             *db << "DELETE FROM inventory WHERE name = ?" << name; // as 'db' is optional and to get the actual from optional (wrapper), dereference operator is needed
-            std::cout << "Successfully added item.";
+            std::cout << "Successfully added item.\n";
             return true;
         }
     }
@@ -245,7 +245,7 @@ bool updateItem(Product item)
 
         *db << "UPDATE inventory SET name = ?, price=?, quantity=? WHERE name=?" << item.getPrice() << item.getQuantity() << item.getName(); // as 'db' is optional and to get the actual from optional (wrapper), dereference operator is needed
 
-        std::cout << "Successfully updated item.";
+        std::cout << "Successfully updated item.\n";
         return true;
     }
     catch (const sqlite::errors::error &e)
@@ -276,7 +276,7 @@ bool updateItem(std::string &name, int &quantity)
 
         *db << "UPDATE inventory SET quantity=? WHERE name=?" << quantity << name; // as 'db' is optional and to get the actual from optional (wrapper), dereference operator is needed
 
-        std::cout << "Successfully updated item.";
+        std::cout << "Successfully updated item.\n";
         return true;
     }
     catch (const sqlite::errors::error &e)
@@ -307,7 +307,7 @@ bool updateItem(std::string &name, double &price)
 
         *db << "UPDATE inventory SET price=? WHERE name=?" << price << name; // as 'db' is optional and to get the actual from optional (wrapper), dereference operator is needed
 
-        std::cout << "Successfully updated item.";
+        std::cout << "Successfully updated item.\n";
         return true;
     }
     catch (const sqlite::errors::error &e)

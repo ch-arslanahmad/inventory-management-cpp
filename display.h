@@ -28,19 +28,26 @@ int MenuHandler(const std::vector<std::string> &options)
     }
 }
 
+#include <iomanip>
+#include <iostream>
+
 void displayItemDetails(Product item)
 {
-    printf("***---%s---***\n", item.getName().c_str());
-    printf("***---Price: %f---***\n", item.getPrice());
-    printf("***---Quantity: %d---***\n", item.getQuantity());
+    printf("+----------------------------------+\n");
+    printf("| %-32s |\n", item.getName().c_str());
+    printf("|----------------------------------|\n");
+    printf("| Price: $%-10.2f               |\n", item.getPrice());
+    printf("| Quantity: %-9d              |\n", item.getQuantity());
+    printf("+----------------------------------+\n\n");
 }
 
 void displayAllItems(std::vector<Product> items)
 {
+    printf("\n=== INVENTORY ITEMS ===\n");
     int i = 1;
     for (Product item : items)
     {
-        printf("Item#%d\n", i);
+        printf("Item #%d\n", i);
         displayItemDetails(item);
         i++;
     }
